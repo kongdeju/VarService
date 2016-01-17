@@ -5,6 +5,7 @@ import os
 import msgpack
 import glob
 from multiprocessing import Process,Manager
+from modules.modeofinhere  import secondfilt
 
 Path = 'data/'
 
@@ -27,12 +28,19 @@ def path2genes(paths):
 
 def make_cmd(head_items,filt_str):
 	if filt_str == "All":
+		mengdel_filt = None
+		sex = "U"
 		filt_cmd = '1'
-		return filt_cmd
+		return filt_cmd,mengdel_filt,sex
+
 	gene_pat = re.compile('Gene in (\[.+?\])')
 	path_pat = re.compile('Path in (\[.+?\])')
+	mengdel_pat = re.compile('and Inheritary in (\[.+?\])')
+	sex_pat = re.compile('and Sex == (\w)')
 	mat1 = gene_pat.search(filt_str)
 	mat2 = path_pat.search(filt_str)
+	mat3 = mengdel_pat.search(filt_str)
+	mat4 = sex_pat.search(filt_str)
 	if mat1:
 		gene_list = eval(mat1.group(1))
 		global Genes1
@@ -44,7 +52,23 @@ def make_cmd(head_items,filt_str):
 		global Genes2
 		Genes2 = set(gene_list)
 		filt_str,n2 = path_pat.subn("Gene in Genes2",filt_str)
+	if mat3:
+		mengdel_filt = mat3.group(1)
+		filt_str = mengdel_pat.sub('',filt_str)
+	else:
+		mengdel_filt = None
+	if mat4:
+		sex = mat4.group(1)
+		filt_str = sex_pat.sub('',filt_str)
+	else:
+		sex = "U"
+
 	filt_items = filt_str.split()
+	if not filt_items:
+		filt_cmd = '1'
+		mengdel_filt = None
+		sex = "U"
+		return filt_cmd,mengdel_filt,sex
 	i = -1
 	for item in filt_items:
 		i = i + 1
@@ -68,7 +92,7 @@ def make_cmd(head_items,filt_str):
 			filt_items[i-1] = "Float(item%d)" % key_idx1
 			filt_items[i+1] = "%s" % filt_items[i+1]
 	filt_cmd = " ".join(filt_items)
-	return filt_cmd
+	return filt_cmd,mengdel_filt,sex
 			
 def Float(str):
 	try:
@@ -79,15 +103,23 @@ def Float(str):
 
 def filt_vars(vas,filt_str):
 	head_items = vas[0]
-	filt_cmd = make_cmd(head_items,filt_str)
+	filt_cmd,mengdel,sex = make_cmd(head_items,filt_str)
 	filtvars = []
 	cmd = "for items in vas:\n "
 	for i in range(len(head_items)):
 		cmd = cmd  + "\titem%s = items[%s]\n" % (i,i)
 	cmd = cmd + "\tif %s :\n" %  filt_cmd
-	cmd = cmd + "\t\tfiltvars.append(items)"
+	cmd = cmd + "\t\tfiltvars.append(items)\n"
+	cmd = cmd + "filtvars.insert(0,head_items)"
 	exec(cmd)
-	return filtvars
+	return filtvars,mengdel,sex
+
+def mengdel_vars(vars,filt_str,sex):
+	if filt_str :
+		vars = secondfilt.secondfilt(vars,filt_str,sex)
+		return vars
+	else:
+		return vars
 
 def FiltVars(sample_no,filt_str):
 	filename = sample_no + '.bson'
@@ -95,7 +127,8 @@ def FiltVars(sample_no,filt_str):
 	try: 
 		vas = load_bson(file_path)
 		try:
-			filts = filt_vars(vas,filt_str)
+			filts,mengdel,sex = filt_vars(vas,filt_str)
+			filts = mengdel_vars(filts,mengdel,sex)
 			status = "Success"
 			return status,filts
 		except:
@@ -132,5 +165,5 @@ def LoadVars(sample_no):
 		vas = "NA"
 		return status,vas
 
-if __name__ == "__main__":
-	LoadVars('WGC050803D')	
+#if __name__ == "__main__":
+#	LoadVars('WGC050803D')	

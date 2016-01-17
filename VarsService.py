@@ -30,11 +30,11 @@ def filt_vars(sample_no):
 	try:
 		request_data = json.loads(request.data)
 		filt_str = request_data["filt"]
-	except:
+	except Exception as e:
 		filt_str = "All"
-	filename = sample_no + ".json"
 	Status,Vars = FiltVars(sample_no,filt_str)
 	return json.dumps({"status":Status,"vars":Vars})
+	return "error"
 
 @app.route("/get/<sample_no>/",methods=["GET"])
 def get_vars(sample_no):

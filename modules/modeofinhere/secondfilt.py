@@ -3,15 +3,15 @@ from collections import defaultdict
 
 
 
-def dictify(vars):
-	head = vars[0]
+def dictify(variants):
+	head = variants[0]
 	gene_idx = head.index("Gene")
 	gt_idx = head.index("GenoType")
 	chr_idx = head.index("Chr")
 	gene_gts = defaultdict(list)
 	gene_chrs = defaultdict(list)
 	gene_mods = defaultdict(list)
-	for var in vars[1:]:
+	for var in variants[1:]:
 		gene = var[gene_idx]
 		gt = var[gt_idx]
 		chr = var[chr_idx]
@@ -83,16 +83,16 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 
 
 
-def secondfilt(vars,filtstr,sex="U"):
+def secondfilt(variants,filtstr,sex="U"):
 
-	gene_gts,gene_chrs,gene_mods = dictify(vars)	
+	gene_gts,gene_chrs,gene_mods = dictify(variants)	
 	genelable = labelgene(gene_gts,gene_chrs,gene_mods,sex)
 
 	filtset = set(eval(filtstr))
-	head = vars[0]
+	head = variants[0]
 	gene_idx = head.index("Gene")
 	filtvars = []
-	for var in vars[1:]:
+	for var in variants[1:]:
 		gene = var[gene_idx]
 		lable = genelable[gene]
 		if lable in filtset:

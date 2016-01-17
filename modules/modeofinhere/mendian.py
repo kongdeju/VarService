@@ -1,7 +1,12 @@
 import msgpack
-
+import sys
+import os
 ####load ModelianGenes as a Global Variables
-fp = open('genemode.bson','r')
+
+script_path = sys.path[0]
+genemode = os.path.join(script_path,'modules/modeofinhere/genemode.bson')
+
+fp = open(genemode,'r')
 MendelianGenes = msgpack.unpackb(fp.read())
 
 def GeneMode(gene):
