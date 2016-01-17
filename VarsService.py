@@ -9,6 +9,9 @@ from FiltVars import FiltVars,LoadVars,HeadVars
 #import  msgpack 
 import json
 import time
+from modules.loads import hgmd_dict
+from modules.hgmdservice.hgmd import hgmdserve
+
 
 app = Flask('__name__')
 
@@ -45,6 +48,11 @@ def get_vars(sample_no):
 def head_vars(sample_no):
 	Status,Vars = HeadVars(sample_no)
 	return json.dumps({"status":Status,"vars":Vars})
+
+@app.route("/hgmd/<id>/",methods=["get"])
+def get_hgmd(id):
+	rec = hgmdserve(id,hgmd_dict)
+	return rec
 
 
 @app.route("/wakeup/",methods=["GET"])
