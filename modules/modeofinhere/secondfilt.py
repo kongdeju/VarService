@@ -74,7 +74,7 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 		if (mod == "AD" or mod == "AR" or mod == "UN" or mod == "UN") and mchr == "X" and sex == "M":
 			if nhet + nhom == 1:
 				degree = "Highly"
-			if nhet + nhome >=2:
+			if nhet + nhom >=2:
 				degree = "Maybe"
 
 		lable = mchr + "_" + mod + "_" + degree	

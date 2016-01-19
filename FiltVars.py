@@ -103,9 +103,10 @@ def Float(str):
 
 def filt_vars(vas,filt_str):
 	head_items = vas[0]
+	print vas[1]
 	filt_cmd,mengdel,sex = make_cmd(head_items,filt_str)
 	filtvars = []
-	cmd = "for items in vas:\n "
+	cmd = "for items in vas[1:]:\n "
 	for i in range(len(head_items)):
 		cmd = cmd  + "\titem%s = items[%s]\n" % (i,i)
 	cmd = cmd + "\tif %s :\n" %  filt_cmd
