@@ -92,6 +92,7 @@ def secondfilt(variants,filtstr,sex="U"):
 	head = variants[0]
 	gene_idx = head.index("Gene")
 	filtvars = []
+	filtvars.append(head)
 	for var in variants[1:]:
 		gene = var[gene_idx]
 		lable = genelable[gene]
