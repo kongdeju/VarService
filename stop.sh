@@ -1,1 +1,1 @@
-lsof -i:8000 | awk '{print $2}' | xargs kill -9 
+lsof -i:7000 | awk '{print $2}' | xargs kill -9 

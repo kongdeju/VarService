@@ -3,7 +3,7 @@ import random
 
 app = Flask("__name__")
 
-clients = ["10.44.147.219:8000","10.51.75.12:8000"]
+clients = ["10.44.147.219:8001","10.51.75.12:8000"]
 
 num = len(clients)
 i = 0
@@ -40,4 +40,4 @@ def head_vars(sample_no):
 
 
 if __name__ == "__main__":
-	app.run()
+	app.run(debug=True)
