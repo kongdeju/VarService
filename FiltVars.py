@@ -9,6 +9,12 @@ from modules.modeofinhere  import secondfilt
 
 Path = 'data/'
 
+gene_pat = re.compile('Gene in (\[.+?\])')
+path_pat = re.compile('Path in (\[.+?\])')
+mengdel_pat1 = re.compile('^Inheritary in (\[.+?\])')
+mengdel_pat2 = re.compile('and Inheritary in (\[.+?\])')
+sex_pat = re.compile('and Sex == (\w)')
+
 def load_bson(filename):
 	fp = open(filename,'rb')
 	vas = msgpack.unpackb(fp.read())
@@ -33,13 +39,10 @@ def make_cmd(head_items,filt_str):
 		filt_cmd = '1'
 		return filt_cmd,mengdel_filt,sex
 
-	gene_pat = re.compile('Gene in (\[.+?\])')
-	path_pat = re.compile('Path in (\[.+?\])')
-	mengdel_pat = re.compile('and Inheritary in (\[.+?\])')
-	sex_pat = re.compile('and Sex == (\w)')
 	mat1 = gene_pat.search(filt_str)
 	mat2 = path_pat.search(filt_str)
-	mat3 = mengdel_pat.search(filt_str)
+	mat3_1 = mengdel_pat1.search(filt_str)
+	mat3_2 = mengdel_pat2.search(filt_str)
 	mat4 = sex_pat.search(filt_str)
 	if mat1:
 		gene_list = eval(mat1.group(1))
@@ -52,11 +55,18 @@ def make_cmd(head_items,filt_str):
 		global Genes2
 		Genes2 = set(gene_list)
 		filt_str,n2 = path_pat.subn("Gene in Genes2",filt_str)
-	if mat3:
-		mengdel_filt = mat3.group(1)
-		filt_str = mengdel_pat.sub('',filt_str)
+
+	if mat3_1:
+		mengdel_filt = mat3_1.group(1)
+		filt_str = '1'
+		print mengdel_filt
 	else:
-		mengdel_filt = None
+		if mat3_2:	
+			mengdel_filt = mat3_2.group(1)
+			filt_str = mengdel_pat2.sub('',filt_str)
+		else:
+			mengdel_filt = None
+
 	if mat4:
 		sex = mat4.group(1)
 		filt_str = sex_pat.sub('',filt_str)
@@ -103,7 +113,6 @@ def Float(str):
 
 def filt_vars(vas,filt_str):
 	head_items = vas[0]
-	print vas[1]
 	filt_cmd,mengdel,sex = make_cmd(head_items,filt_str)
 	filtvars = []
 	cmd = "for items in vas[1:]:\n "
