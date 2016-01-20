@@ -1,0 +1,8 @@
+[2016-01-20 17:07:41 +0000] [5755] [INFO] Starting gunicorn 19.4.4
+[2016-01-20 17:07:41 +0000] [5755] [INFO] Listening at: http://0.0.0.0:8000 (5755)
+[2016-01-20 17:07:41 +0000] [5755] [INFO] Using worker: gevent
+[2016-01-20 17:07:41 +0000] [5760] [INFO] Booting worker with pid: 5760
+[2016-01-20 17:07:41 +0000] [5761] [INFO] Booting worker with pid: 5761
+[2016-01-20 17:07:41 +0000] [5770] [INFO] Booting worker with pid: 5770
+[2016-01-20 17:07:41 +0000] [5771] [INFO] Booting worker with pid: 5771
+run.sh: line 1:  5755 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0:8000 Api:app

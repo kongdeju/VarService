@@ -3,7 +3,7 @@ import random
 
 app = Flask("__name__")
 
-clients = ["10.44.147.219:8001","10.51.75.12:8000"]
+clients = ["10.44.147.219:8001","10.51.75.12:8001"]
 
 num = len(clients)
 i = 0

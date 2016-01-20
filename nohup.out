@@ -626,3 +626,15 @@ run.sh: line 1:  8327 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0
 [2016-01-20 13:01:11 +0000] [20342] [INFO] Booting worker with pid: 20342
 [2016-01-20 13:01:11 +0000] [20346] [INFO] Booting worker with pid: 20346
 run.sh: line 1: 20330 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0:8000 VarsService:app
+[2016-01-20 17:07:30 +0000] [5748] [INFO] Starting gunicorn 19.4.4
+[2016-01-20 17:07:30 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:07:30 +0000] [5748] [ERROR] Retrying in 1 second.
+[2016-01-20 17:07:31 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:07:31 +0000] [5748] [ERROR] Retrying in 1 second.
+[2016-01-20 17:07:32 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:07:32 +0000] [5748] [ERROR] Retrying in 1 second.
+[2016-01-20 17:07:33 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:07:33 +0000] [5748] [ERROR] Retrying in 1 second.
+[2016-01-20 17:07:34 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:07:34 +0000] [5748] [ERROR] Retrying in 1 second.
+[2016-01-20 17:07:35 +0000] [5748] [ERROR] Can't connect to ('0.0.0.0', 8001)
