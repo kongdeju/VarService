@@ -38,6 +38,12 @@ def head_vars(sample_no):
 	url = "http://%s/head/%s/" % (clients[i],sample_no)
 	return redirect(url)
 
+@app.route("/hgmd/<variant_id>/",methods=["GET"])
+def head_vars(variant_id):
+	i = choose()
+	url = "http://%s/hgmd/%s/" % (clients[i],variant_id)
+	return redirect(url)
+
 
 if __name__ == "__main__":
 	app.run(debug=True)
