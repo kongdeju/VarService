@@ -27,6 +27,7 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 		nhet = 0
 		nhom = 0
 		mchr = ''
+		lables =[]
 		for gt in gene_gts[gene]:
 			if gt == "0|0" or gt == "0/0" or gt == "1/1" or gt == "1|1":
 				nhom = nhom + 1
@@ -48,15 +49,17 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 				degree = "Highly"
 				if mod == "UN":
 					mod = "PAD"
-			if nhet  + nhom == 2:
+			if nhet  + nhom >= 2:
 				degree = "Maybe"
 				if mod == "UN":
 					mod = "PAD"
-			if nhet + nhom >2:
-				degree = "Cannot"
+			if nhet == 0 and  nhom == 1:
+				degree = "Maybe"
 				if mod == "UN":
 					mod = "PAD"	
-		
+			lable = mchr + '_' + mod + "_" + degree
+			lables.append(lable)
+
 		if (mod == "AR" or mod == "UN") and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
 			if ( nhet == 2 and nhom == 0 ) or ( nhet == 0 and nhom == 1 ) :
 				degree = "Highly"
@@ -70,6 +73,8 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 				if mod == "UN":
 					mod = "PAR"
 				degree = "Cannot"
+			lable = mchr + "_" + mod + "_" + degree
+			lables.append(lable)
 
 		if (mod == "AD" or mod == "AR" or mod == "UN" or mod == "UN") and mchr == "X" and sex == "M":
 			if nhet + nhom == 1:
@@ -77,8 +82,10 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 			if nhet + nhom >=2:
 				degree = "Maybe"
 
-		lable = mchr + "_" + mod + "_" + degree	
-		genelable[gene] = lable
+			lable = mchr + "_" + mod + "_" + degree	
+			lables.append(lable)
+
+		genelable[gene] = lables
 	return genelable
 
 
@@ -95,8 +102,8 @@ def secondfilt(variants,filtstr,sex="U"):
 	filtvars.append(head)
 	for var in variants[1:]:
 		gene = var[gene_idx]
-		lable = genelable[gene]
-		if lable in filtset:
+		lable = set(genelable[gene])
+		if lable & filtset:
 			filtvars.append(var)
 	return filtvars
 

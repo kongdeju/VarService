@@ -59,7 +59,6 @@ def make_cmd(head_items,filt_str):
 	if mat3_1:
 		mengdel_filt = mat3_1.group(1)
 		filt_str = '1'
-		print mengdel_filt
 	else:
 		if mat3_2:	
 			mengdel_filt = mat3_2.group(1)

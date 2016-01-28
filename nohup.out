@@ -638,3 +638,29 @@ run.sh: line 1: 20330 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0
 [2016-01-20 17:07:34 +0000] [5748] [ERROR] Connection in use: ('0.0.0.0', 8001)
 [2016-01-20 17:07:34 +0000] [5748] [ERROR] Retrying in 1 second.
 [2016-01-20 17:07:35 +0000] [5748] [ERROR] Can't connect to ('0.0.0.0', 8001)
+[2016-01-20 17:13:21 +0000] [31175] [INFO] Starting gunicorn 19.3.0
+[2016-01-20 17:13:21 +0000] [31175] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:13:21 +0000] [31175] [ERROR] Retrying in 1 second.
+[2016-01-20 17:13:22 +0000] [31175] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:13:22 +0000] [31175] [ERROR] Retrying in 1 second.
+[2016-01-20 17:13:23 +0000] [31175] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:13:23 +0000] [31175] [ERROR] Retrying in 1 second.
+[2016-01-20 17:13:24 +0000] [31175] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:13:24 +0000] [31175] [ERROR] Retrying in 1 second.
+[2016-01-20 17:13:25 +0000] [31175] [ERROR] Connection in use: ('0.0.0.0', 8001)
+[2016-01-20 17:13:25 +0000] [31175] [ERROR] Retrying in 1 second.
+[2016-01-20 17:13:26 +0000] [31175] [ERROR] Can't connect to ('0.0.0.0', 8001)
+[2016-01-21 09:22:34 +0000] [17973] [INFO] Starting gunicorn 19.3.0
+[2016-01-21 09:22:34 +0000] [17973] [INFO] Listening at: http://0.0.0.0:8001 (17973)
+[2016-01-21 09:22:34 +0000] [17973] [INFO] Using worker: gevent
+[2016-01-21 09:22:34 +0000] [17978] [INFO] Booting worker with pid: 17978
+[2016-01-21 09:22:34 +0000] [17983] [INFO] Booting worker with pid: 17983
+[2016-01-21 09:22:34 +0000] [17984] [INFO] Booting worker with pid: 17984
+[2016-01-21 09:22:34 +0000] [17989] [INFO] Booting worker with pid: 17989
+[2016-01-21 15:02:38 +0000] [17973] [INFO] Handling signal: hup
+[2016-01-21 15:02:38 +0000] [17973] [INFO] Hang up: Master
+[2016-01-21 15:02:38 +0000] [26053] [INFO] Booting worker with pid: 26053
+[2016-01-21 15:02:38 +0000] [26054] [INFO] Booting worker with pid: 26054
+[2016-01-21 15:02:38 +0000] [26055] [INFO] Booting worker with pid: 26055
+[2016-01-21 15:02:38 +0000] [26056] [INFO] Booting worker with pid: 26056
+run.sh: line 1: 17973 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0:8001 VarsService:app
