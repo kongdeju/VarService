@@ -664,3 +664,20 @@ run.sh: line 1: 20330 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0
 [2016-01-21 15:02:38 +0000] [26055] [INFO] Booting worker with pid: 26055
 [2016-01-21 15:02:38 +0000] [26056] [INFO] Booting worker with pid: 26056
 run.sh: line 1: 17973 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0:8001 VarsService:app
+[2016-01-29 18:18:25 +0000] [8467] [INFO] Starting gunicorn 19.3.0
+[2016-01-29 18:18:25 +0000] [8467] [INFO] Listening at: http://0.0.0.0:8001 (8467)
+[2016-01-29 18:18:25 +0000] [8467] [INFO] Using worker: gevent
+[2016-01-29 18:18:25 +0000] [8472] [INFO] Booting worker with pid: 8472
+[2016-01-29 18:18:25 +0000] [8473] [INFO] Booting worker with pid: 8473
+[2016-01-29 18:18:25 +0000] [8478] [INFO] Booting worker with pid: 8478
+[2016-01-29 18:18:25 +0000] [8479] [INFO] Booting worker with pid: 8479
+[2016-01-29 20:55:38 +0000] [11086] [INFO] Booting worker with pid: 11086
+[2016-01-29 20:55:38 +0000] [11087] [INFO] Booting worker with pid: 11087
+[2016-01-29 20:55:38 +0000] [8467] [INFO] Handling signal: hup
+[2016-01-29 20:55:38 +0000] [8467] [INFO] Hang up: Master
+[2016-01-29 20:55:38 +0000] [11096] [INFO] Booting worker with pid: 11096
+[2016-01-29 20:55:38 +0000] [11097] [INFO] Booting worker with pid: 11097
+[2016-01-29 20:55:38 +0000] [11098] [INFO] Booting worker with pid: 11098
+[2016-01-29 20:55:38 +0000] [11099] [INFO] Booting worker with pid: 11099
+[2016-01-29 20:55:38 +0000] [11086] [INFO] Worker exiting (pid: 11086)
+[2016-01-29 20:55:38 +0000] [11087] [INFO] Worker exiting (pid: 11087)

@@ -1,4 +1,4 @@
 
-from modules.modeofinhere import secondfilt
+from modules.modeofinhere import add_genemode4vars
 
 

@@ -11,7 +11,7 @@ import json
 import time
 from modules.loads import hgmd_dict
 from modules.hgmdservice.hgmd import hgmdserve
-
+from modules.modeofinhere.add_genemode4vars import add_genemode
 
 app = Flask('__name__')
 
@@ -36,8 +36,8 @@ def filt_vars(sample_no):
 	except Exception as e:
 		filt_str = "All"
 	Status,Vars = FiltVars(sample_no,filt_str)
+	Vars = add_genemode(vars)
 	return json.dumps({"status":Status,"vars":Vars})
-	return "error"
 
 @app.route("/get/<sample_no>/",methods=["GET"])
 def get_vars(sample_no):
@@ -47,6 +47,7 @@ def get_vars(sample_no):
 @app.route("/head/<sample_no>/",methods=["GET"])
 def head_vars(sample_no):
 	Status,Vars = HeadVars(sample_no)
+	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/hgmd/<id>/",methods=["get"])
