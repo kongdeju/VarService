@@ -36,7 +36,7 @@ def filt_vars(sample_no):
 	except Exception as e:
 		filt_str = "All"
 	Status,Vars = FiltVars(sample_no,filt_str)
-	Vars = add_genemode(vars)
+	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/get/<sample_no>/",methods=["GET"])

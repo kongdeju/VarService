@@ -681,3 +681,11 @@ run.sh: line 1: 17973 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0
 [2016-01-29 20:55:38 +0000] [11099] [INFO] Booting worker with pid: 11099
 [2016-01-29 20:55:38 +0000] [11086] [INFO] Worker exiting (pid: 11086)
 [2016-01-29 20:55:38 +0000] [11087] [INFO] Worker exiting (pid: 11087)
+run.sh: line 1:  8467 Killed                  gunicorn -w 4 -k gevent -b 0.0.0.0:8001 VarsService:app
+[2016-01-30 12:23:26 +0000] [27287] [INFO] Starting gunicorn 19.3.0
+[2016-01-30 12:23:26 +0000] [27287] [INFO] Listening at: http://0.0.0.0:8001 (27287)
+[2016-01-30 12:23:26 +0000] [27287] [INFO] Using worker: gevent
+[2016-01-30 12:23:26 +0000] [27292] [INFO] Booting worker with pid: 27292
+[2016-01-30 12:23:26 +0000] [27293] [INFO] Booting worker with pid: 27293
+[2016-01-30 12:23:26 +0000] [27294] [INFO] Booting worker with pid: 27294
+[2016-01-30 12:23:26 +0000] [27307] [INFO] Booting worker with pid: 27307
