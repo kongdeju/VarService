@@ -5,3 +5,10 @@
 [2016-01-30 15:33:51 +0000] [30541] [INFO] Booting worker with pid: 30541
 [2016-01-30 15:33:51 +0000] [30550] [INFO] Booting worker with pid: 30550
 [2016-01-30 15:33:51 +0000] [30551] [INFO] Booting worker with pid: 30551
+[2016-02-03 15:11:37 +0000] [1760] [INFO] Starting gunicorn 19.3.0
+[2016-02-03 15:11:37 +0000] [1760] [INFO] Listening at: http://0.0.0.0:8001 (1760)
+[2016-02-03 15:11:37 +0000] [1760] [INFO] Using worker: gevent
+[2016-02-03 15:11:37 +0000] [1765] [INFO] Booting worker with pid: 1765
+[2016-02-03 15:11:37 +0000] [1766] [INFO] Booting worker with pid: 1766
+[2016-02-03 15:11:37 +0000] [1767] [INFO] Booting worker with pid: 1767
+[2016-02-03 15:11:37 +0000] [1776] [INFO] Booting worker with pid: 1776
