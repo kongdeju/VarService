@@ -10,20 +10,19 @@ def update_clients():
         run('git fetch')
         run('git reset --hard origin/master')
 
-def start_clients():
-	with cd('/data/vars_project/vars_service/'):
-		run('sh run.sh')
-
 def stop_clients():
 	with cd('/data/vars_project/vars_service/'):
 		run('sh stop.sh')
-
-@roles("api")
-def start_api():
-	with cd('/data/vars_project/vars_service/interface/'):
-		run('sh run.sh')
+def start_clients():
+	with cd('/data/vars_project/vars_service/'):
+		run('sh run.sh && sleep 1')
 
 @roles("api")
 def stop_api():
 	with cd('/data/vars_project/vars_service/interface/'):
 		run('sh stop.sh')
+
+@roles("api")
+def start_api():
+	with cd('/data/vars_project/vars_service/interface/'):
+		run('sh -x run.sh && sleep 1')
