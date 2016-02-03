@@ -6,7 +6,7 @@ import msgpack
 import glob
 from multiprocessing import Process,Manager
 from modules.modeofinhere  import secondfilt
-
+from modules.hpo2gene.hps2genes import hps2genes
 Path = 'data/'
 
 gene_pat = re.compile('Gene in (\[.+?\])')
@@ -14,6 +14,7 @@ path_pat = re.compile('Path in (\[.+?\])')
 mengdel_pat1 = re.compile('^Inheritary in (\[.+?\])')
 mengdel_pat2 = re.compile('and Inheritary in (\[.+?\])')
 sex_pat = re.compile('and Sex == (\w)')
+pheo_pat = re.compile('Phenotype in (\[.+?\])')
 
 def load_bson(filename):
 	fp = open(filename,'rb')
@@ -44,6 +45,8 @@ def make_cmd(head_items,filt_str):
 	mat3_1 = mengdel_pat1.search(filt_str)
 	mat3_2 = mengdel_pat2.search(filt_str)
 	mat4 = sex_pat.search(filt_str)
+	mat5 = pheo_pat.search(filt_str)
+
 	if mat1:
 		gene_list = eval(mat1.group(1))
 		global Genes1
@@ -55,7 +58,13 @@ def make_cmd(head_items,filt_str):
 		global Genes2
 		Genes2 = set(gene_list)
 		filt_str,n2 = path_pat.subn("Gene in Genes2",filt_str)
-
+	if mat5:
+		pheno_list = eval(mat5.group(1))
+		gene_set = hps2genes(pheno_list)
+		global Genes3
+		Genes3 = gene_set
+		print Genes3
+		filt_str = pheo_pat.sub("Gene in Genes3",filt_str)
 	if mat3_1:
 		mengdel_filt = mat3_1.group(1)
 		filt_str = '1'
@@ -121,6 +130,7 @@ def filt_vars(vas,filt_str):
 	cmd = cmd + "\t\tfiltvars.append(items)\n"
 	cmd = cmd + "filtvars.insert(0,head_items)"
 	exec(cmd)
+	print cmd
 	return filtvars,mengdel,sex
 
 def mengdel_vars(vars,filt_str,sex):
