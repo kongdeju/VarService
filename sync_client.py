@@ -10,9 +10,8 @@ def update_clients():
         run('git fetch')
         run('git reset --hard origin/master')
 
-def restart_clients():
+def start_clients():
 	with cd('/data/vars_project/vars_service/'):
-		run('sh stop.sh')
 		run('sh run.sh')
 
 def stop_clients():
@@ -20,12 +19,11 @@ def stop_clients():
 		run('sh stop.sh')
 
 @roles("api")
-def restart_interface():
+def start_api():
 	with cd('/data/vars_project/vars_service/interface/'):
-		run('sh stop.sh')
 		run('sh run.sh')
 
 @roles("api")
-def stop_interface():
+def stop_api():
 	with cd('/data/vars_project/vars_service/interface/'):
 		run('sh stop.sh')
