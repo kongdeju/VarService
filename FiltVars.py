@@ -63,7 +63,6 @@ def make_cmd(head_items,filt_str):
 		gene_set = hps2genes(pheno_list)
 		global Genes3
 		Genes3 = gene_set
-		print Genes3
 		filt_str = pheo_pat.sub("Gene in Genes3",filt_str)
 	if mat3_1:
 		mengdel_filt = mat3_1.group(1)
@@ -130,7 +129,7 @@ def filt_vars(vas,filt_str):
 	cmd = cmd + "\t\tfiltvars.append(items)\n"
 	cmd = cmd + "filtvars.insert(0,head_items)"
 	exec(cmd)
-	print cmd
+	#print cmd
 	return filtvars,mengdel,sex
 
 def mengdel_vars(vars,filt_str,sex):

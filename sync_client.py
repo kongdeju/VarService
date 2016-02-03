@@ -2,7 +2,7 @@ from fabric.api import *
 
 env.hosts = ["Varer@10.44.147.219:22"]
 
-env.roledefs = {"api":"Varer@10.44.147.219:22"}
+env.roledefs = {"api":["Varer@10.44.147.219:22"]}
 
 
 def update_clients():
