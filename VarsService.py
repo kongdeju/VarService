@@ -42,6 +42,7 @@ def filt_vars(sample_no):
 @app.route("/get/<sample_no>/",methods=["GET"])
 def get_vars(sample_no):
 	Status,Vars = LoadVars(sample_no)
+	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/head/<sample_no>/",methods=["GET"])
