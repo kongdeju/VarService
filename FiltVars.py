@@ -115,7 +115,7 @@ def Float(str):
 	try:
 		fnum = float(str)
 	except:
-		fnum =None
+		fnum =''
 	return fnum
 
 def filt_vars(vas,filt_str):
@@ -129,7 +129,7 @@ def filt_vars(vas,filt_str):
 	cmd = cmd + "\t\tfiltvars.append(items)\n"
 	cmd = cmd + "filtvars.insert(0,head_items)"
 	exec(cmd)
-	#print cmd
+	print cmd
 	return filtvars,mengdel,sex
 
 def mengdel_vars(vars,filt_str,sex):
