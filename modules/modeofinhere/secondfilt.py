@@ -41,50 +41,48 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 		else:
 			mchr = chr
 		
-		if ( "AD" in mod or "UN" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W" )):
+		if ( "D" in mod or "U" in mod or "O" in mod or "L" in mod) and ( mchr == "Norm" or ( mchr == "X" and sex == "W" )):
 			modstr = "AD"
 			if nhet == 1 and nhom == 0:
 				degree = "Highly"
-				if "UN" in mod :
+				if "D" not in mod :
 					modstr = "PAD"
 			if nhet  + nhom >= 2:
 				degree = "Maybe"
-				if "UN" in mod :
+				if "D" not in mod :
 					modstr = "PAD"
 			if nhet == 0 and  nhom == 1:
 				degree = "Maybe"
-				if "UN" in mod:
+				if "D" not in mod:
 					modstr = "PAD"	
 			lable = mchr + '_' + modstr + "_" + degree
 			lables.append(lable)
 
-		if ("AR" in mod or "UN" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
+		if ("R" in mod or "U" in mod or "O" in mod or "L" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
 			modstr = "AR"
 			if ( nhet == 2 and nhom == 0 ) or ( nhet == 0 and nhom == 1 ) :
 				degree = "Highly"
-				if "UN" in mod :
+				if "R" not in mod :
 					modstr = "PAR"
 			if nhet + nhom >2:		
-				if "UN" in mod :
+				if "R" not in mod :
 					modstr = "PAR"
 				degree = "Maybe"
 			if nhet == 1 and nhom == 0:
-				if "UN" in mod:
+				if "R" not in mod:
 					mod = "PAR"
 				degree = "Cannot"
 			lable = mchr + "_" + modstr + "_" + degree
 			lables.append(lable)
-
-		if ( "AD" in mod  or "AR" in mod  or "UN" in mod ) and mchr == "X" and sex == "M":
-			if nhet + nhom == 1:
-				degree = "Highly"
-			if nhet + nhom >=2:
-				degree = "Maybe"
-			for item in mod:
-				modstr = item
-				lable = mchr + "_" + modstr + "_" + degree	
-				lables.append(lable)
-
+#		if  mchr == "X" and sex == "M":
+#			if nhet + nhom == 1:
+#				degree = "Highly"
+#			if nhet + nhom >=2:
+#				degree = "Maybe"
+#			for item in mod:
+#				modstr = item
+#				lable = mchr + "_" + modstr + "_" + degree	
+#				lables.append(lable)
 		genelable[gene] = lables
 	return genelable
 
