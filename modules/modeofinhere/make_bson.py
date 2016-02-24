@@ -1,6 +1,6 @@
 import msgpack
-
-fp = open("genemode.tsv","r")
+import sys
+fp = open(sys.argv[1],"r")
 
 genemodes = {}
 
@@ -13,8 +13,17 @@ for line in fp:
 		mtype = "AD"
 	elif mod == "Autosomal recessive":
 		mtype = "AR"
-	genemodes[gene] = mtype
-
+	if gene in genemodes:
+		if mtype in genemodes[gene]:
+			continue
+		else:
+			genemodes[gene].append(mtype)
+	else:
+		genemodes[gene] = [mtype]
+for k,v in genemodes.items():
+	if "UN" in v and ( "AD" in v or "AR" in v ) :
+		v.remove("UN")
+		genemodes[k] = v
 fp.close()
 packed = msgpack.packb(genemodes)
 

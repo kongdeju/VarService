@@ -1,8 +1,6 @@
 from mendian import GeneMode
 from collections import defaultdict
 
-
-
 def dictify(variants):
 	head = variants[0]
 	gene_idx = head.index("Gene")
@@ -43,47 +41,49 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 		else:
 			mchr = chr
 		
-		if (mod == "AD" or mod == "UN") and ( mchr == "Norm" or ( mchr == "X" and sex == "W" )):
-
+		if ( "AD" in mod or "UN" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W" )):
+			modstr = "AD"
 			if nhet == 1 and nhom == 0:
 				degree = "Highly"
-				if mod == "UN":
-					mod = "PAD"
+				if "UN" in mod :
+					modstr = "PAD"
 			if nhet  + nhom >= 2:
 				degree = "Maybe"
-				if mod == "UN":
-					mod = "PAD"
+				if "UN" in mod :
+					modstr = "PAD"
 			if nhet == 0 and  nhom == 1:
 				degree = "Maybe"
-				if mod == "UN":
-					mod = "PAD"	
-			lable = mchr + '_' + mod + "_" + degree
+				if "UN" in mod:
+					modstr = "PAD"	
+			lable = mchr + '_' + modstr + "_" + degree
 			lables.append(lable)
 
-		if (mod == "AR" or mod == "UN") and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
+		if ("AR" in mod or "UN" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
+			modstr = "AR"
 			if ( nhet == 2 and nhom == 0 ) or ( nhet == 0 and nhom == 1 ) :
 				degree = "Highly"
-				if mod == "UN":
-					mod = "PAR"
+				if "UN" in mod :
+					modstr = "PAR"
 			if nhet + nhom >2:		
-				if mod == "UN":
-					mod = "PAR"
+				if "UN" in mod :
+					modstr = "PAR"
 				degree = "Maybe"
 			if nhet == 1 and nhom == 0:
-				if mod == "UN":
+				if "UN" in mod:
 					mod = "PAR"
 				degree = "Cannot"
-			lable = mchr + "_" + mod + "_" + degree
+			lable = mchr + "_" + modstr + "_" + degree
 			lables.append(lable)
 
-		if (mod == "AD" or mod == "AR" or mod == "UN" or mod == "UN") and mchr == "X" and sex == "M":
+		if ( "AD" in mod  or "AR" in mod  or "UN" in mod ) and mchr == "X" and sex == "M":
 			if nhet + nhom == 1:
 				degree = "Highly"
 			if nhet + nhom >=2:
 				degree = "Maybe"
-
-			lable = mchr + "_" + mod + "_" + degree	
-			lables.append(lable)
+			for item in mod:
+				modstr = item
+				lable = mchr + "_" + modstr + "_" + degree	
+				lables.append(lable)
 
 		genelable[gene] = lables
 	return genelable

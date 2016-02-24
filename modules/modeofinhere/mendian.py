@@ -13,6 +13,7 @@ def GeneMode(gene):
 	mode = "UN"
 	try:
 		mode = MendelianGenes[gene]
+		mode = ",".join(mode)
 	except:
 		pass
 	return mode
