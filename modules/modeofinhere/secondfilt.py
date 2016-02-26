@@ -42,35 +42,29 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 			mchr = chr
 		
 		if ( "D" in mod or "U" in mod or "O" in mod or "L" in mod) and ( mchr == "Norm" or ( mchr == "X" and sex == "W" )):
-			modstr = "AD"
+			if "D" in mod:
+				modstr = "AD"
+			else:
+				modstr = "PAD"
 			if nhet == 1 and nhom == 0:
 				degree = "Highly"
-				if "D" not in mod :
-					modstr = "PAD"
 			if nhet  + nhom >= 2:
 				degree = "Maybe"
-				if "D" not in mod :
-					modstr = "PAD"
 			if nhet == 0 and  nhom == 1:
 				degree = "Maybe"
-				if "D" not in mod:
-					modstr = "PAD"	
 			lable = mchr + '_' + modstr + "_" + degree
 			lables.append(lable)
 
 		if ("R" in mod or "U" in mod or "O" in mod or "L" in mod ) and ( mchr == "Norm" or ( mchr == "X" and sex == "W")):
-			modstr = "AR"
+			if "R" in mod:
+				modstr = "AR"
+			else:
+				modstr = "PAR"
 			if ( nhet == 2 and nhom == 0 ) or ( nhet == 0 and nhom == 1 ) :
 				degree = "Highly"
-				if "R" not in mod :
-					modstr = "PAR"
 			if nhet + nhom >2:		
-				if "R" not in mod :
-					modstr = "PAR"
 				degree = "Maybe"
 			if nhet == 1 and nhom == 0:
-				if "R" not in mod:
-					mod = "PAR"
 				degree = "Cannot"
 			lable = mchr + "_" + modstr + "_" + degree
 			lables.append(lable)
