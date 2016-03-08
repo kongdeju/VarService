@@ -51,7 +51,7 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
 			if nhet  + nhom >= 2:
 				degree = "Maybe"
 			if nhet == 0 and  nhom == 1:
-				degree = "Maybe"
+				degree = "Cannot"
 			lable = mchr + '_' + modstr + "_" + degree
 			lables.append(lable)
 
