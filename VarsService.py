@@ -6,7 +6,7 @@ import os
 from flask import Flask
 from flask import request
 from FiltVars import FiltVars,LoadVars,HeadVars
-#import  msgpack 
+import  msgpack 
 import json
 import time
 from modules.loads import hgmd_dict
@@ -28,7 +28,7 @@ app = Flask('__name__')
 def ping():
     return "Service is online"
 
-@app.route("/filter/<sample_no>/", methods=["GET"])
+@app.route("/filter/<sample_no>/", methods=["GET","POST"])
 def filt_vars(sample_no):
 	try:
 		request_data = json.loads(request.data)
@@ -39,13 +39,13 @@ def filt_vars(sample_no):
 	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
-@app.route("/get/<sample_no>/",methods=["GET"])
+@app.route("/get/<sample_no>/",methods=["GET","POST"])
 def get_vars(sample_no):
 	Status,Vars = LoadVars(sample_no)
 	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
-@app.route("/head/<sample_no>/",methods=["GET"])
+@app.route("/head/<sample_no>/",methods=["GET","POST"])
 def head_vars(sample_no):
 	Status,Vars = HeadVars(sample_no)
 	Vars = add_genemode(Vars)
@@ -57,9 +57,9 @@ def get_hgmd(id):
 	return rec
 
 
-@app.route("/wakeup/",methods=["GET"])
+@app.route("/wakeup/",methods=["GET","POST"])
 def wake():
-	time.sleep(1)
+	time.sleep(100)
 	return "I am awake"
 
 if __name__ == '__main__':

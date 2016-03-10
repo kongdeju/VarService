@@ -14,35 +14,35 @@ def choose():
 	mod = i % num 
 	return mod
 
-@app.route("/wakeup/",methods=["GET"])
+@app.route("/wakeup/",methods=["GET","POST"])
 def wake():
 	i = choose()
 	url = "http://%s/wakeup/" % clients[i]
-	return redirect(url)
+	return redirect(url,code=307)
 
-@app.route("/filter/<sample_no>/",methods=["GET"])
+@app.route("/filter/<sample_no>/",methods=["GET","POST"])
 def filt_vars(sample_no):
 	i = choose()
 	url = "http://%s/filter/%s/" % (clients[i],sample_no)
 	return redirect(url,code=307)
 
-@app.route("/get/<sample_no>/",methods=["GET"])
+@app.route("/get/<sample_no>/",methods=["GET","POST"])
 def get_vars(sample_no):
 	i = choose()
 	url = "http://%s/get/%s/" % (clients[i],sample_no)
-	return redirect(url)
+	return redirect(url,code=307)
 
-@app.route("/head/<sample_no>/",methods=["GET"])
+@app.route("/head/<sample_no>/",methods=["GET","POST"])
 def head_vars(sample_no):
 	i = choose()
 	url = "http://%s/head/%s/" % (clients[i],sample_no)
-	return redirect(url)
+	return redirect(url,code=307)
 
-@app.route("/hgmd/<variant_id>/",methods=["GET"])
+@app.route("/hgmd/<variant_id>/",methods=["GET","POST"])
 def hgmd_vars(variant_id):
 	i = choose()
 	url = "http://%s/hgmd/%s/" % (clients[i],variant_id)
-	return redirect(url)
+	return redirect(url,code=307)
 
 
 if __name__ == "__main__":
