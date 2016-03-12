@@ -1,8 +1,8 @@
 
 
-def hgmdserve(id,db):
+def hgmdserve(hgmdid,db):
 	try:
-		rec = db[id]
+		rec = db[hgmdid]
 	except:
 		rec = "No recond"
 	return rec

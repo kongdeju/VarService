@@ -51,9 +51,9 @@ def head_vars(sample_no):
 	Vars = add_genemode(Vars)
 	return json.dumps({"status":Status,"vars":Vars})
 
-@app.route("/hgmd/<id>/",methods=["get"])
-def get_hgmd(id):
-	rec = hgmdserve(id,hgmd_dict)
+@app.route("/hgmd/<hgmdid>/",methods=["get"])
+def get_hgmd(hgmdid):
+	rec = hgmdserve(hgmdid,hgmd_dict)
 	return rec
 
 
