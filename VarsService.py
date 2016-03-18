@@ -35,7 +35,7 @@ def filt_vars(sample_no):
         filt_str = request_data["filt"]
         rec_time = time.ctime()
         filt_log = rec_time + "\t" + filt_str + "\n"
-        os.system("echo '%s' >>filt.log" % filt_log)
+        os.system('echo "%s" >>filt.log' % filt_log)
     except Exception as e:
         filt_str = "All"
     Status,Vars = FiltVars(sample_no,filt_str)
