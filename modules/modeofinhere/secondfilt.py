@@ -141,7 +141,7 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
             mchr = "Norm"
         else:
             mchr = chr
-        print mod,mchr,nhet,nhom,sex
+        #print mod,mchr,nhet,nhom,sex
         normad_lb = norm_ad(mod,mchr,nhet,nhom)
         normar_lb = norm_ad(mod,mchr,nhet,nhom)
         xad_lb = x_ad(mod,mchr,nhet,nhom,sex)

@@ -13,7 +13,8 @@ gene_pat = re.compile('Gene in (\[.+?\])')
 path_pat = re.compile('Path in (\[.+?\])')
 mengdel_pat1 = re.compile('^Inheritary in (\[.+?\])')
 mengdel_pat2 = re.compile('and Inheritary in (\[.+?\])')
-sex_pat = re.compile('and Sex == (\w)')
+sex_pat1 = re.compile('and Sex == (\w)')
+sex_pat2 = re.compile('Sex == (\w) and')
 pheo_pat = re.compile('Phenotype in (\[.+?\])')
 
 def load_bson(filename):
@@ -34,9 +35,9 @@ def path2genes(paths):
     return Genes
 
 def make_cmd(head_items,filt_str):
+    sex = "U"
     if filt_str == "All":
         mengdel_filt = None
-        sex = "U"
         filt_cmd = '1'
         return filt_cmd,mengdel_filt,sex
 
@@ -44,7 +45,8 @@ def make_cmd(head_items,filt_str):
     mat2 = path_pat.search(filt_str)
     mat3_1 = mengdel_pat1.search(filt_str)
     mat3_2 = mengdel_pat2.search(filt_str)
-    mat4 = sex_pat.search(filt_str)
+    mat4 = sex_pat1.search(filt_str)
+    mat4_1 = sex_pat2.search(filt_str)
     mat5 = pheo_pat.search(filt_str)
 
     if mat1:
@@ -76,10 +78,12 @@ def make_cmd(head_items,filt_str):
 
     if mat4:
         sex = mat4.group(1)
-        filt_str = sex_pat.sub('',filt_str)
-    else:
-        sex = "U"
+        filt_str = sex_pat1.sub('',filt_str)
+    if mat4_1:
+        sex = mat4_1.group(1)
+        filt_str = sex_pat2.sub('',filt_str)
 
+    print sex
     filt_items = filt_str.split()
     if not filt_items:
         filt_cmd = '1'
@@ -129,7 +133,6 @@ def filt_vars(vas,filt_str):
     cmd = cmd + "\t\tfiltvars.append(items)\n"
     cmd = cmd + "filtvars.insert(0,head_items)"
     exec(cmd)
-    print cmd
     return filtvars,mengdel,sex
 
 def mengdel_vars(vars,filt_str,sex):

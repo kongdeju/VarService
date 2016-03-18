@@ -30,37 +30,40 @@ def ping():
 
 @app.route("/filter/<sample_no>/", methods=["GET","POST"])
 def filt_vars(sample_no):
-	try:
-		request_data = json.loads(request.data)
-		filt_str = request_data["filt"]
-	except Exception as e:
-		filt_str = "All"
-	Status,Vars = FiltVars(sample_no,filt_str)
-	Vars = add_genemode(Vars)
-	return json.dumps({"status":Status,"vars":Vars})
+    try:
+        request_data = json.loads(request.data)
+        filt_str = request_data["filt"]
+        rec_time = time.ctime()
+        filt_log = rec_time + "\t" + filt_str + "\n"
+        os.system("echo '%s' >>filt.log" % filt_log)
+    except Exception as e:
+        filt_str = "All"
+    Status,Vars = FiltVars(sample_no,filt_str)
+    Vars = add_genemode(Vars)
+    return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/get/<sample_no>/",methods=["GET","POST"])
 def get_vars(sample_no):
-	Status,Vars = LoadVars(sample_no)
-	Vars = add_genemode(Vars)
-	return json.dumps({"status":Status,"vars":Vars})
+    Status,Vars = LoadVars(sample_no)
+    Vars = add_genemode(Vars)
+    return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/head/<sample_no>/",methods=["GET","POST"])
 def head_vars(sample_no):
-	Status,Vars = HeadVars(sample_no)
-	Vars = add_genemode(Vars)
-	return json.dumps({"status":Status,"vars":Vars})
+    Status,Vars = HeadVars(sample_no)
+    Vars = add_genemode(Vars)
+    return json.dumps({"status":Status,"vars":Vars})
 
 @app.route("/hgmd/<hgmdid>/",methods=["get"])
 def get_hgmd(hgmdid):
-	rec = hgmdserve(hgmdid,hgmd_dict)
-	return rec
+    rec = hgmdserve(hgmdid,hgmd_dict)
+    return rec
 
 
 @app.route("/wakeup/",methods=["GET","POST"])
 def wake():
-	time.sleep(100)
-	return "I am awake"
+    time.sleep(2)
+    return "I am awake"
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0",debug=True)
