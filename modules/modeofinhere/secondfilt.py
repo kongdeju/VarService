@@ -38,6 +38,7 @@ def norm_ad(mod,mchr,nhet,nhom):
         lable = mchr + '_' + modstr + "_" + degree
         return lable
 def norm_ar(mod,mchr,nhet,nhom):
+    degree = None
     if "AR" in mod:
         modstr = "AR"
     elif "UN" in mod or "AU" in mod  or "AO" in mod:
@@ -143,11 +144,11 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
             mchr = chr
         #print mod,mchr,nhet,nhom,sex
         normad_lb = norm_ad(mod,mchr,nhet,nhom)
-        normar_lb = norm_ad(mod,mchr,nhet,nhom)
+        normar_lb = norm_ar(mod,mchr,nhet,nhom)
         xad_lb = x_ad(mod,mchr,nhet,nhom,sex)
         xar_lb = x_ar(mod,mchr,nhet,nhom,sex)
         lables = [normad_lb,normar_lb,xad_lb,xar_lb]
-        #print lables
+        print lables
         genelable[gene] = lables
     return genelable
 
