@@ -148,7 +148,7 @@ def labelgene(gene_gts,gene_chrs,gene_mods,sex):
         xad_lb = x_ad(mod,mchr,nhet,nhom,sex)
         xar_lb = x_ar(mod,mchr,nhet,nhom,sex)
         lables = [normad_lb,normar_lb,xad_lb,xar_lb]
-        print lables
+        #print lables
         genelable[gene] = lables
     return genelable
 

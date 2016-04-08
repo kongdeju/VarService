@@ -7,6 +7,7 @@ import glob
 from multiprocessing import Process,Manager
 from modules.modeofinhere  import secondfilt
 from modules.hpo2gene.hps2genes import hps2genes
+from SortVars import SortVars
 Path = 'data/'
 
 gene_pat = re.compile('Gene in (\[.+?\])')
@@ -83,7 +84,6 @@ def make_cmd(head_items,filt_str):
         sex = mat4_1.group(1)
         filt_str = sex_pat2.sub('',filt_str)
 
-    print sex
     filt_items = filt_str.split()
     if not filt_items:
         filt_cmd = '1'
@@ -151,6 +151,7 @@ def FiltVars(sample_no,filt_str):
             filts,mengdel,sex = filt_vars(vas,filt_str)
             filts = mengdel_vars(filts,mengdel,sex)
             status = "Success"
+            filts = SortVars(filts)
             return status,filts
         except:
             
