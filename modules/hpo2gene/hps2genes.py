@@ -11,7 +11,7 @@ def hps2genes(hps):
 	try:
 		totalgenes = set(hp2gene[hps[1]])
 	except:
-		totalgenes = Genes
+		totalgenes = set()
 
 	for hp in hps[2:]:
 		if mod == 'intersect':
@@ -19,13 +19,13 @@ def hps2genes(hps):
 				genes = set(hp2gene[hp])
 				totalgenes = totalgenes & genes
 			except:
-				genes = Genes
+				genes = set()
 				totalgenes = totalgenes & genes
 		elif mod == 'join':
 			try:
 				genes = set(hp2gene[hp])
 				totalgenes = totalgenes | genes
 			except:
-				genes = Genes
+				genes = set()
 				totalgenes = totalgenes | genes
 	return totalgenes
